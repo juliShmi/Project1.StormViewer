@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UITableViewController {
     
     var pictures = [String]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +27,14 @@ class ViewController: UITableViewController {
             }
         }
         pictures = pictures.sorted()
-        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(recommend))
+    }
+    
+    @objc func recommend(){
+        let vc = UIActivityViewController(activityItems: [self, "Recommend me to your friends!"], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pictures.count
@@ -47,6 +54,6 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-
+    
 }
 
